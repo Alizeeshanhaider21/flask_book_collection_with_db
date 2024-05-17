@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block style %} {{ bootstrap.load_css() }} {% endblock style %} {% from
+  'bootstrap5/table.html' import render_table %}
+  <meta charset="UTF-8" />
+  <title>Library</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+    
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 mt-5 mx-auto">
+        <h1 class="text-center">Library</h1>
+        <a href="/add/0">Add New Book</a>
+        {% if books|length >0 %}
+        <table class="table table-hover table-striped pt-2 " id="myTable">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Author</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for book in books %}
+            <tr class="my-1">
+              <th scope="row">{{loop.index}}</th>
+              <td>{{book.name}}</td>
+              <td>{{book.author}}</td>
+              <td>{{book.rating}}/5</td>
+              <td>
+                <a type="button" class="btn btn-outline-info btn-sm" href="/add/{{book.id}}">Edit</a>
+                |
+                <a type="submit" class="btn btn-outline-danger btn-sm" href="/delete/{{book.id}}">Delete</a>
+              </td>
+            </tr>
+            {% endfor %} {% else %}
+            <p>No Record Found....</p>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#myTable').dataTable();
+      });
+  </script>
+  </div>
+</body>
+
+</html>
