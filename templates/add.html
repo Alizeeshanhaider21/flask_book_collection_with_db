@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block style %} {{ bootstrap.load_css() }} {% endblock style %} 
+    {% from
+    'bootstrap5/form.html' import render_form %}
+    <meta charset="UTF-8" />
+    <title>Add Book</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 mt-5 p-3 mx-auto shadow shadow-lg">
+          <h3>Add a Book</h3>
+         
+          {% if id==0 %}
+          <form method="post" action="/add/{{id}}">
+            {{ form.csrf_token }}
+            <!-- {{id}} -->
+            <div class="form-group my-2">
+              <label for="">Book Name</label>
+              <input type="text" class="form-control" name="name"   value="" placeholder="Enter Book name" required>
+            
+            </div>
+            <div class="form-group my-2">
+              <label for="">Book Author</label>
+              <input type="text" class="form-control" name="author"  value="" placeholder="Author Name" required>
+            </div>
+            <div class="form-group my-2">
+              <label for="">Book Rating</label>
+              <input type="text" class="form-control" name="rating" value="" placeholder="Rating" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" href="">Add/Update</button>
+          </form>
+          {% else %}
+          <form method="post" action="/add/{{id}}">
+            {{ form.csrf_token }}
+            <!-- {{id}} -->
+            <div class="form-group my-2">
+              <label for="">Book Name</label>
+              <input type="text" class="form-control" name="name"   value="{{update_data.name}}" placeholder="Enter Book name">
+            
+            </div>
+            <div class="form-group my-2">
+              <label for="">Book Author</label>
+              <input type="text" class="form-control" name="author"  value="{{update_data.author}}" placeholder="Author Name">
+            </div>
+            <div class="form-group my-2">
+              <label for="">Book Rating</label>
+              <input type="text" class="form-control" name="rating" value="{{update_data.rating}}" placeholder="Rating">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" href="">Add/Update</button>
+          </form>
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
